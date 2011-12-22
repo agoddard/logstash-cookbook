@@ -57,7 +57,7 @@ end
 template "/etc/logstash/shipper.conf" do
   source "shipper.conf.erb"
   variables(
-    :broker_host_ip => broker_host_ip
+    :broker_host_ip => broker_host_ip,
     :files => node['logstash']['files']
   )
 end
