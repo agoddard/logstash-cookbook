@@ -1,9 +1,9 @@
 input {
 
-<% @files.each do |path,type| %>
+<% @files.each do |file| %>
   file {
-    type => "<%= type %>"
-    path => "<%= path %>"
+    type => "<%= file[:type] %>"
+    path => "<%= file[:path] %>"
   }  
   <% end %>
 
@@ -16,7 +16,7 @@ output {
 
   # Ship events to the amqp fanout queue named 'rawlogs"
   amqp {
-    host => "<%= @broker_host_ip %>"
+    host => "<%= @broker_host %>"
     exchange_type => "fanout"
     name => "rawlogs"
   }
