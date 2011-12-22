@@ -40,7 +40,7 @@ end
 #find the broker to send the logs to
 
 search(:node, "role:#{node['logstash']['broker_role']} AND chef_environment:#{node.chef_environment}") do |n|
-  broker_host_ip = n['ipaddress']
+  @broker_host_ip = n['ipaddress']
 end
 
 #create config
@@ -57,7 +57,7 @@ end
 template "/etc/logstash/shipper.conf" do
   source "shipper.conf.erb"
   variables(
-    :broker_host_ip => broker_host_ip,
+    :broker_host_ip => @broker_host_ip,
     :files => node['logstash']['files']
   )
 end
