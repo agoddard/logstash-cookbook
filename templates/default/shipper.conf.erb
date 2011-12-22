@@ -1,0 +1,23 @@
+input {
+
+<% @files.each do |path,type| %>
+  file {
+    type => "<%= type %>"
+    path => "<%= path %>"
+  }  
+  <% end %>
+
+}
+
+output {
+  # Output events to stdout for debugging. Feel free to remove
+  # this output if you don't need it.
+  # stdout { }
+
+  # Ship events to the amqp fanout queue named 'rawlogs"
+  amqp {
+    host => "<%= @broker_host_ip %>"
+    exchange_type => "fanout"
+    name => "rawlogs"
+  }
+}
