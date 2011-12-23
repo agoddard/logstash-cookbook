@@ -51,6 +51,10 @@ directory '/etc/logstash' do
   recursive true
 end
 
+template "/etc/init.d/logstash" do
+  source "shipper.init.erb"
+end
+
 template "/etc/logstash/shipper.conf" do
   source "shipper.conf.erb"
   variables(
