@@ -53,6 +53,7 @@ end
 
 template "/etc/init.d/logstash" do
   source "shipper.init.erb"
+  mode "0755"
 end
 
 template "/etc/logstash/shipper.conf" do
