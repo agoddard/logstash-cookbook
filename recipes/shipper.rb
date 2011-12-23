@@ -43,9 +43,6 @@ search(:node, "role:#{node['logstash']['broker_role']} AND chef_environment:#{no
   broker_host << n['ipaddress']
 end
 
-#create config
-
-
 directory '/etc/logstash' do
   owner "root"
   group "root"
@@ -62,7 +59,9 @@ template "/etc/logstash/shipper.conf" do
   )
 end
 
-
-#start it up
+service "logstash" do
+  supports :status => true, :restart => true, :reload => true
+  action [ :enable, :start ]
+end
 
 
