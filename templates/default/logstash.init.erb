@@ -6,9 +6,9 @@
 # description: Logstash
 # processname: logstash
 
-logstash_bin="/usr/bin/java -jar /opt/logstash/logstash-1.0.17-monolithic.jar"
+logstash_bin="/usr/bin/java -jar <%= node['logstash']['directory']%>/logstash-<%= node['logstash']['version']%>-monolithic.jar"
 logstash_conf="/etc/logstash/shipper.conf"
-logstash_log="/var/log/logstash/logstash.log"
+logstash_log="/var/log/logstash.log"
 NICE_LEVEL="-n 19"
 
 find_logstash_process () {
