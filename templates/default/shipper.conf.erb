@@ -3,23 +3,24 @@ input {
 <% if @syslog %>
   syslog { 
     <%= "debug => #{@syslog[:debug]}" if @syslog[:debug]%>
-    <%= "format => #{@syslog[:format]}" if @syslog[:format]%>
     <%= "host => \"#{@syslog[:listen]}\"" if @syslog[:listen]%>
     <%= "message_format => \"#{@syslog[:message_format]}\"" if @syslog[:message_format]%>
     <%= "port => #{@syslog[:port]}" if @syslog[:format]%>
     <%= "type => \"#{@syslog[:type]}\"" if @syslog[:type]%>
+    <%= "format => #{@syslog[:format]}" if @syslog[:format]%>
     <%= "tags => \"#{@syslog[:tags].to_s}\"" if @syslog[:tags]%>
   }
 <% end %>
 
-<% @files.each do |file| %>
-  file {
-    type => "<%= file[:type] %>"
-    path => "<%= file[:path] %>"
-  }  
-  <% end %>
-
-}
+<% if @files %>
+  <% @files.each do |file| %>
+    file {
+      type => "<%= file[:type] %>"
+      path => "<%= file[:path] %>"
+    }  
+    <% end %>
+<% end%>
+  }
 
 output {
   # Output events to stdout for debugging. Feel free to remove

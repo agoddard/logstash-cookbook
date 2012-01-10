@@ -20,6 +20,8 @@
 # limitations under the License.
 #
 
+include_recipe 'logstash::default'
+
 
 #find the broker to send the logs to
 broker_host = []
@@ -32,6 +34,7 @@ template "/etc/init.d/logstash-shipper" do
   source "shipper.init.erb"
   mode "0755"
 end
+
 
 template "/etc/logstash/shipper.conf" do
   source "shipper.conf.erb"

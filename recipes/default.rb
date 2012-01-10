@@ -20,6 +20,7 @@
 # limitations under the License.
 #
 
+include_recipe 'java'
 
 directory node['logstash']['directory'] do
   owner "root"
