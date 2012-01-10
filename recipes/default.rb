@@ -5,7 +5,7 @@
 # Recipe:: default
 #
 #
-# Copyright 2009, Woods Hole Marine Biologcal Laboratory
+# Copyright 2011, Woods Hole Marine Biologcal Laboratory
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -20,3 +20,25 @@
 # limitations under the License.
 #
 
+
+directory node['logstash']['directory'] do
+  owner "root"
+  group "root"
+  mode "0755"
+  action :create
+  recursive true
+end
+
+remote_file "#{node['logstash']['directory']}/logstash-#{node['logstash']['version']}-monolithic.jar" do
+  source "http://semicomplete.com/files/logstash/logstash-#{node['logstash']['version']}-monolithic.jar"
+  mode "0744"
+  checksum node['logstash']['checksum']
+end
+
+directory '/etc/logstash' do
+  owner "root"
+  group "root"
+  mode "0755"
+  action :create
+  recursive true
+end

@@ -2,7 +2,7 @@
 # Author:: Phil Cryer
 #
 # Cookbook Name:: logstash
-# Recipe:: shipper
+# Recipe:: default
 #
 #
 # Copyright 2011, Woods Hole Marine Biologcal Laboratory
@@ -20,31 +20,4 @@
 # limitations under the License.
 #
 
-
-#find the broker to send the logs to
-broker_host = []
-search(:node, "role:#{node['logstash']['broker_role']} AND chef_environment:#{node.chef_environment}") do |n|
-  broker_host << n['ipaddress']
-end
-
-
-template "/etc/init.d/logstash-shipper" do
-  source "shipper.init.erb"
-  mode "0755"
-end
-
-template "/etc/logstash/shipper.conf" do
-  source "shipper.conf.erb"
-  variables(
-    :broker_host => broker_host,
-    :files => node['logstash']['files'],
-    :syslog => node['logstash']['syslog']
-  )
-end
-
-service "logstash-shipper" do
-  supports :status => true, :restart => true, :reload => true
-  action [ :enable, :start ]
-end
-
-
+include_recipe "rabbitmq"

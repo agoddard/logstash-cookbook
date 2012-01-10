@@ -1,4 +1,16 @@
 input {
+	
+<% if @syslog %>
+  syslog { 
+    <%= "debug => #{@syslog[:debug]}" if @syslog[:debug]%>
+    <%= "format => #{@syslog[:format]}" if @syslog[:format]%>
+    <%= "host => \"#{@syslog[:listen]}\"" if @syslog[:listen]%>
+    <%= "message_format => \"#{@syslog[:message_format]}\"" if @syslog[:message_format]%>
+    <%= "port => #{@syslog[:port]}" if @syslog[:format]%>
+    <%= "type => \"#{@syslog[:type]}\"" if @syslog[:type]%>
+    <%= "tags => \"#{@syslog[:tags].to_s}\"" if @syslog[:tags]%>
+  }
+<% end %>
 
 <% @files.each do |file| %>
   file {
