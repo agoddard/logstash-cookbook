@@ -5,6 +5,7 @@ default['logstash']['url'] = 'http://semicomplete.com/files/logstash/logstash-1.
 default['logstash']['version'] = '1.0.17'
 default['logstash']['checksum'] = 'caba048cb1ab3cc608d4569246f8b7effbb8272865c7864a662566c30517316c'
 
+default['logstash']['syslog_server'] = false
 default['logstash']['syslog']['debug'] = false
 default['logstash']['syslog']['listen'] = '0.0.0.0'
 default['logstash']['syslog']['format'] = ""
