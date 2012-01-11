@@ -26,6 +26,8 @@ gem_package 'jls-grok' do
   action :install
 end
 
+package 'libtokyocabinet8'
+
 remote_file "/tmp/grok_#{node['logstash']['grok']['version']}.deb" do
   source "#{node['logstash']['grok']['url']}#{node['logstash']['grok']['version']}.deb"
   mode "0744"
