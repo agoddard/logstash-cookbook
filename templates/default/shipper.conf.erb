@@ -1,6 +1,6 @@
 input {
 	
-<% if @syslog %>
+<% if @syslog_server == true %>
   syslog { 
     <%= "debug => #{@syslog[:debug]}" if @syslog[:debug]%>
     <%= "host => \"#{@syslog[:listen]}\"" if @syslog[:listen]%>
@@ -28,6 +28,7 @@ output {
   # stdout { }
 
   # Ship events to the amqp fanout queue named 'rawlogs"
+
   amqp {
     host => "<%= @broker_host %>"
     exchange_type => "fanout"

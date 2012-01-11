@@ -22,31 +22,24 @@
 
 include_recipe 'logstash::default'
 
+#find the index / elasticsearch node(s) to store messages in
 
-#find the broker to send the logs to
-broker_host = []
-search(:node, "role:#{node['logstash']['broker_role']} AND chef_environment:#{node.chef_environment}") do |n|
-  broker_host << n['ipaddress']
+index_host = []
+search(:node, "role:#{node['logstash']['index_role']} AND chef_environment:#{node.chef_environment}") do |n|
+  index_host << n['ipaddress']
 end
 
 
-template "/etc/init.d/logstash-shipper" do
-  source "shipper.init.erb"
+template "/etc/init.d/logstash-web" do
+  source "web.init.erb"
   mode "0755"
-end
-
-
-template "/etc/logstash/shipper.conf" do
-  source "shipper.conf.erb"
   variables(
-    :broker_host => broker_host,
-    :syslog_server => node['logstash']['syslog_server'],
-    :files => node['logstash']['files'],
-    :syslog => node['logstash']['syslog']
+    :index_host => index_host
   )
 end
 
-service "logstash-shipper" do
+
+service "logstash-web" do
   supports :status => true, :restart => true, :reload => true
   action [ :enable, :start ]
 end

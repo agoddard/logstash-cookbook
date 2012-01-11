@@ -7,8 +7,8 @@
 # processname: logstash
 
 logstash_bin="/usr/bin/java -jar <%= node['logstash']['directory']%>/logstash-<%= node['logstash']['version']%>-monolithic.jar"
-logstash_conf="/etc/logstash/shipper.conf"
-logstash_log="/var/log/logstash-shipper.log"
+logstash_conf="/etc/logstash/indexer.conf"
+logstash_log="/var/log/logstash-indexer.log"
 NICE_LEVEL="-n 19"
 
 find_logstash_process () {
