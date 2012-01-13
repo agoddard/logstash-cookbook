@@ -55,8 +55,11 @@ end
 
 
 template "/etc/init.d/logstash-indexer" do
-  source "indexer.init.erb"
+  source "logstash.init.erb"
   mode "0755"
+  variables(
+    :mode => "indexer"
+  )
 end
 
 

@@ -31,8 +31,11 @@ end
 
 
 template "/etc/init.d/logstash-shipper" do
-  source "shipper.init.erb"
+  source "logstash.init.erb"
   mode "0755"
+  variables(
+    :mode => "shipper"
+  )
 end
 
 
