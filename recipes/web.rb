@@ -34,7 +34,7 @@ template "/etc/init.d/logstash-web" do
   source "logstash.init.erb"
   mode "0755"
   variables(
-    :index_host => index_host
+    :index_host => index_host,
     :mode => "web"
   )
 end
