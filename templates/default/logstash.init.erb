@@ -14,21 +14,21 @@
 
 mode="<%= @mode %>"
 name="logstash-$mode"
-logstash_bin="/usr/bin/java -jar <%= node['logstash']['directory']%>/logstash-<%= node['logstash']['version']%>-monolithic.jar"
+logstash_bin="/usr/bin/java -- -jar <%= node['logstash']['directory']%>/logstash-<%= node['logstash']['version'] %>-monolithic.jar"
 logstash_conf="/etc/logstash/$mode.conf"
 logstash_log="/var/log/logstash/$name.log"
 pid_file="/var/run/$name.pid"
 
-NICE_LEVEL="-n 19"
+NICE_LEVEL="19"
 
 start () {
 <% if @mode=="web" %>
-	command="/usr/bin/nice ${NICE_LEVEL} ${logstash_bin} web -f $logstash_conf --log ${logstash_log}" --backend elasticsearch://<%=@index_host%>" 
+	command="${logstash_bin} web --log ${logstash_log} --backend elasticsearch://<%= @index_host %>" 
 <% else %>
-	command="/usr/bin/nice ${NICE_LEVEL} ${logstash_bin} agent -f $logstash_conf --log ${logstash_log}"
+	command="${logstash_bin} agent -f $logstash_conf --log ${logstash_log}"
 <% end %>
 	log_daemon_msg "Starting $mode" "$name"
-	if start-stop-daemon --start --quiet --oknodo --pidfile "$pid_file" -b -m --exec $command; then
+	if start-stop-daemon --start --pidfile "$pid_file" -d /tmp -b -m -N ${NICE_LEVEL} -a $command; then
 		log_end_msg 0
 	else
 		log_end_msg 1
