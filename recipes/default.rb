@@ -43,3 +43,12 @@ directory '/etc/logstash' do
   action :create
   recursive true
 end
+
+directory '/var/log/logstash' do
+  owner "root"
+  group "root"
+  mode "0755"
+  action :create
+  recursive true
+end
+
