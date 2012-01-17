@@ -46,8 +46,6 @@ filter {
 output {
 
 <% if @index_host %>
-  elasticsearch {
-    host => "<%= @index_host %>"
-  }
+  elasticsearch {}
 <% end %>
 }
