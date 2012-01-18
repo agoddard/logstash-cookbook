@@ -2,7 +2,7 @@
 # Author:: Phil Cryer
 #
 # Cookbook Name:: logstash
-# Recipe:: default
+# Recipe:: index
 #
 #
 # Copyright 2011, Woods Hole Marine Biologcal Laboratory
