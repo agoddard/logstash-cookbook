@@ -27,6 +27,7 @@ gem_package 'jls-grok' do
 end
 
 package 'libtokyocabinet8'
+package 'libevent'
 
 remote_file "/tmp/grok_#{node['logstash']['grok']['version']}.deb" do
   source "#{node['logstash']['grok']['url']}#{node['logstash']['grok']['version']}.deb"
