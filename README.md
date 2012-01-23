@@ -84,11 +84,11 @@ This will install a logstash instance which will tail files defined in the node'
 
 To setup a broker node,
 
-    include_recipe "logstash::shipper"
+    include_recipe "logstash::broker"
 
 To setup an indexer node,
 
-    include_recipe "logstash::shipper"
+    include_recipe "logstash::indexer"
 
 The indexer will connect to the broker host, fetch logs from the broker's queue and add them to elasticsearch
 
