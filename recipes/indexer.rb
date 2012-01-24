@@ -43,8 +43,12 @@ end
 
 #find the broker(s) to recieve messages from
 broker_host = []
-search(:node, "role:#{node['logstash']['broker_role']} AND chef_environment:#{node.chef_environment}") do |n|
-  broker_host << n['ipaddress']
+if node['logstash']['remote_broker_ip']
+  	  broker_host << node['logstash']['remote_broker_ip']
+else
+	search(:node, "role:#{node['logstash']['broker_role']} AND chef_environment:#{node.chef_environment}") do |n|
+  	  broker_host << n['ipaddress']
+	end
 end
 
 #find the index / elasticsearch node(s) to store messages in
