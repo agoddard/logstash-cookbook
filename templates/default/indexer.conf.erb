@@ -4,6 +4,9 @@ input {
   amqp { 
     type => "all"
     host => "<%= @broker_host %>"
+    <% unless @broker_port.nil? %> 
+    port => "<%= @broker_port %>"
+    <% end %>
     exchange_type => "fanout"
     name => "rawlogs"
   }

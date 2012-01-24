@@ -1,6 +1,7 @@
 default['logstash']['directory'] = '/opt/logstash'
 default['logstash']['server_role'] = 'logstash-server'
 default['logstash']['broker_role'] = 'logstash-broker'
+default['logstash']['remote_broker_ip'] = nil
 default['logstash']['index_role'] = 'logstash-index'
 default['logstash']['url'] = 'http://semicomplete.com/files/logstash/logstash-1.0.17-monolithic.jar'
 default['logstash']['version'] = '1.0.17'

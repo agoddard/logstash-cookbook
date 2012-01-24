@@ -45,6 +45,7 @@ end
 broker_host = []
 if node['logstash']['remote_broker_ip']
   	  broker_host << node['logstash']['remote_broker_ip']
+	  broker_port = node['logstash']['remote_broker_port'] if node['logstash']['remote_broker_port'] 
 else
 	search(:node, "role:#{node['logstash']['broker_role']} AND chef_environment:#{node.chef_environment}") do |n|
   	  broker_host << n['ipaddress']
@@ -72,6 +73,7 @@ template "/etc/logstash/indexer.conf" do
   source "indexer.conf.erb"
   variables(
     :broker_host => broker_host,
+    :broker_port => broker_port,
     :index_host => index_host
   )
 end
