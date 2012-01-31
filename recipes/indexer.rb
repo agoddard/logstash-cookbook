@@ -59,6 +59,12 @@ search(:node, "role:#{node['logstash']['index_role']} AND chef_environment:#{nod
   index_host << n['ipaddress']
 end
 
+graylog2_host = []
+search(:node, "role:graylog2_server AND chef_environment:#{node.chef_environment}") do |n|
+  index_host << n['ipaddress']
+end
+
+
 
 template "/etc/init.d/logstash-indexer" do
   source "logstash.init.erb"
@@ -74,7 +80,8 @@ template "/etc/logstash/indexer.conf" do
   variables(
     :broker_host => broker_host,
     :broker_port => broker_port,
-    :index_host => index_host
+    :index_host => index_host,
+    :graylog2_host => graylog2_host
   )
 end
 

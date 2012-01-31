@@ -47,6 +47,18 @@ filter {
 
 
 output {
+	
+<% if @graylog2_host %>
+  gelf {
+    #chunksize => ... # number, default: 1420
+    #facility => ... # string, default: "logstash-gelf"
+    host => "<%= @graylog2_host %>"
+    #level => ... # string, default: "INFO"
+    #port => ... # number, default: 12201
+    #sender => ... # string, default: "%{@source_host}"
+  }
+<% end %>
+	
 
 <% if @index_host %>
   elasticsearch {}
