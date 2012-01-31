@@ -61,7 +61,7 @@ end
 
 graylog2_host = []
 search(:node, "role:graylog2_server AND chef_environment:#{node.chef_environment}") do |n|
-  index_host << n['ipaddress']
+  graylog2_host << n['ipaddress']
 end
 
 
