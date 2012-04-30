@@ -3,9 +3,9 @@ default['logstash']['server_role'] = 'logstash-server'
 default['logstash']['broker_role'] = 'logstash-broker'
 default['logstash']['remote_broker_ip'] = nil
 default['logstash']['index_role'] = 'logstash-index'
-default['logstash']['url'] = 'http://semicomplete.com/files/logstash/logstash-1.0.17-monolithic.jar'
-default['logstash']['version'] = '1.0.17'
-default['logstash']['checksum'] = 'caba048cb1ab3cc608d4569246f8b7effbb8272865c7864a662566c30517316c'
+default['logstash']['url'] = 'http://semicomplete.com/files/logstash/logstash-1.1.0-monolithic.jar'
+default['logstash']['version'] = '1.1.0'
+default['logstash']['checksum'] = '6c9f491865b5eed569e029f6ad9f3343f346cfa04d04314e7aadea7b9578490f'
 
 default['logstash']['grok']['url'] = 'http://semicomplete.googlecode.com/files/grok_'
 default['logstash']['grok']['version'] = '1.20101030.3088_amd64'
