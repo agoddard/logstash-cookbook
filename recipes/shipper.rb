@@ -30,12 +30,9 @@ search(:node, "role:#{node['logstash']['broker_role']} AND chef_environment:#{no
 end
 
 
-template "/etc/init.d/logstash-shipper" do
+template "/etc/init.d/logstash" do
   source "logstash.init.erb"
   mode "0755"
-  variables(
-    :mode => "shipper"
-  )
 end
 
 
@@ -49,7 +46,7 @@ template "/etc/logstash/shipper.conf" do
   )
 end
 
-service "logstash-shipper" do
+service "logstash" do
   supports :status => true, :restart => true, :reload => true
   action [ :enable, :start ]
 end

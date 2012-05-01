@@ -66,12 +66,9 @@ end
 
 
 
-template "/etc/init.d/logstash-indexer" do
+template "/etc/init.d/logstash" do
   source "logstash.init.erb"
   mode "0755"
-  variables(
-    :mode => "indexer"
-  )
 end
 
 
@@ -85,7 +82,7 @@ template "/etc/logstash/indexer.conf" do
   )
 end
 
-service "logstash-indexer" do
+service "logstash" do
   supports :status => true, :restart => true, :reload => true
   action [ :enable, :start ]
 end
