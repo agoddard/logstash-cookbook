@@ -15,7 +15,7 @@
 mode="<%= @mode %>"
 name="logstash-$mode"
 logstash_bin="/usr/bin/java -- -jar <%= node['logstash']['directory']%>/logstash-<%= node['logstash']['version'] %>-monolithic.jar"
-logstash_conf="/etc/logstash/$mode.conf"
+logstash_conf="/etc/logstash/"
 logstash_log="/var/log/logstash/$name.log"
 pid_file="/var/run/$name.pid"
 
