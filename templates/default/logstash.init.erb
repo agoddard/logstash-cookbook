@@ -12,11 +12,10 @@
 
 . /lib/lsb/init-functions
 
-mode="<%= @mode %>"
-name="logstash-$mode"
+name="logstash"
 logstash_bin="/usr/bin/java -- -jar <%= node['logstash']['directory']%>/logstash-<%= node['logstash']['version'] %>-monolithic.jar"
 logstash_conf="/etc/logstash/"
-logstash_log="/var/log/logstash/$name.log"
+logstash_log="/var/log/logstash/logstash.log"
 pid_file="/var/run/$name.pid"
 
 NICE_LEVEL="19"
@@ -27,7 +26,7 @@ start () {
 <% else %>
 	command="${logstash_bin} agent -f $logstash_conf --log ${logstash_log}"
 <% end %>
-	log_daemon_msg "Starting $mode" "$name"
+	log_daemon_msg "Starting" "$name"
 	if start-stop-daemon --start --pidfile "$pid_file" -d /tmp -b -m -N ${NICE_LEVEL} -a $command; then
 		log_end_msg 0
 	else
